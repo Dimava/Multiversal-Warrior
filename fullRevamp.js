@@ -1,7 +1,10 @@
-//const { createApp, reactive } = Vue
+const data = Vue.reactive({
+  show: {} // Will be assigned after ShowableClass creation
+})
+const app = Vue.createApp({data: () => data})
+app.mount('body')
 
-
-
+/** @type {ShowableClass} */
 var IShowableClass;
 var IGameData;
 var IPermanent;
@@ -1268,6 +1271,8 @@ class ShowableClass {
 
     }
 
+    this.showable = Vue.reactive(this.showable);
+
   }
 }
 
@@ -1403,6 +1408,7 @@ class UniversalChallenger {
 function createClassInstance(type) {
   if (type == null) {
     IShowableClass = new ShowableClass();
+    data.show = IShowableClass.showable; // Assign to Vue data
     IGameData = new GameData();
     IPermanent = new Permanent();
     ITraining = new Training();
@@ -1418,6 +1424,7 @@ function createClassInstance(type) {
 
   if (type == 1) {
     IShowableClass = new ShowableClass();
+    data.show = IShowableClass.showable; // Assign to Vue data
     IGameData = new GameData();
     ITraining = new Training();
     IFight = new Fight();
@@ -9682,61 +9689,30 @@ function sec(number) {
 
 function unlockShow(show, visibility) {
   let showableItem = IShowableClass.showable
-  for (let a in showableItem) {
-    if (a == show) {
 
-      if (visibility == false) {
-        showableItem[show] = false;
-        document.getElementById(a).style.display = "none";
-      }
-      if (visibility == true) {
-        showableItem[show] = true;
-        document.getElementById(a).style.display = "";
-      }
-    }
+  // Check if the showable property exists
+  if (showableItem[show] === undefined) {
+    console.warn(`unlockShow: showable property '${show}' does not exist`);
+    return;
   }
+
+  // Set the showable property
+  showableItem[show] = !!visibility;
 }
 
 function unlockShowAll(visibility) {
   let showableItem = IShowableClass.showable
   for (let a in showableItem) {
-    const keys = Object.keys(showableItem[a]);
-    for (let key of keys) {
-      if (visibility === false) {
-        document.getElementById(key).style.display = "none";
-      }
-      if (visibility === true) {
-        document.getElementById(key).style.display = "";
-      }
-    }
+    showableItem[a] = !!visibility;
   }
 }
 
 function checkShow(show) {
   let showableItem = IShowableClass.showable
-  for (let a in showableItem) {
-    if (a == show) {
-      var value = showableItem[a]
-      return value;
-    }
-  }
+  return !!showableItem[show];
 }
 
 function loopShow() {
-  let showableItem = IShowableClass.showable
-  for (let a in showableItem) {
-    const value = showableItem[a];
-    if (value == false) {
-      if (document.getElementById(a) == null) {
-      } else {
-        document.getElementById(a).style.display = "none";
-      }
-    }
-    if (value == true) {
-      document.getElementById(a).style.display = "";
-    }
-  }
-
   //initial
 
   if (IShowableClass.init) {

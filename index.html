@@ -7,9 +7,19 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cssRevamp.css?v=1.40">
 
     <title>Multiversal Warrior</title>
+
+    <script type="module">
+        import * as Vue from "./libs/vue.esm-browser.js";
+        window.Vue = Vue;
+        import Decimal from "./libs/break_eternity.esm.js";
+        window.Decimal = Decimal;
+    </script>
+    <script defer src="fullRevamp.js?v=1.40" charset="utf-8"></script>
 
 </head>
 
@@ -1136,25 +1146,6 @@
     </div>
     </div>
 
-    <!-- 1. Carica la libreria break_infinity.js -->
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <!-- 2. Carica il tuo script personalizzato (che utilizza BreakInfinity.js) -->
-    <script type="module" src="fullRevamp.js?v=1.50" charset="utf-8"></script>
-
-    <!-- 3. Carica altre librerie necessarie, come crypto-js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-    <!-- 4. Carica il file CSS per la formattazione -->
-    <link rel="stylesheet" href="cssRevamp.css?v=1.50">
-
-    <script type="module">
-        import Decimal from "./libs/break_infinity.esm.js";
-        window.Decimal = Decimal; // 👈 rende Decimal globale
-    </script>
-
-    <!--<script src="./libs/dist/vue.global.js"></script>-->
 </body>
 
 </html>
