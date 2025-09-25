@@ -1093,7 +1093,7 @@ class ShowableClass {
 
       //Valutes
 
-      universeValute: false, essenceValute: false,
+      powerValute: false, universeValute: false, essenceValute: false,
 
       universalShardsBase: true,
       universalNodesBase: false,
