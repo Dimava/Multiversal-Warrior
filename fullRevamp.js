@@ -3513,7 +3513,7 @@ function valuesSetter(type) {
               `
   sel.effectDesc = `× ${format(f(sel.effect), 0)}`
   sel.level = f(sel.level)
-  sel.effect = f(Decimal.log2(IUniversalChallenger.universalShards)).mul(f(sel.level))
+  sel.effect = f(Decimal.log2(new Decimal(IUniversalChallenger.universalShards).max(0.1))).mul(f(sel.level))
   sel.price = f(5).pow(f(sel.level).add(f(1)))
 
   if (f(sel.level).gt(f(0))) {
@@ -7382,7 +7382,7 @@ function spheres(targetId, numSpheres, radiusXPercent, radiusYPercent, colorSele
 
 function svgFire(value) {
   // Usa Decimal.js per calcolare la dimensione
-  if (f(Decimal.log10(f(value))).gt(f(90))) {
+  if (f(Decimal.log10(f(value).max(0.1))).gt(f(90))) {
     var size1 = f(100)
   } else {
     if ((value).gt(f(0))) {
@@ -9661,7 +9661,8 @@ function format(number, type, formatType = IPermanent.notation["notation" + IPer
 
 function f(number) {
   if (isNaN(number)) {
-    return
+    console.trace("f(NaN) is NaN");
+    return new Decimal(0);
   } else {
 
     return new Decimal(number);  // Converte in un oggetto Decimal
